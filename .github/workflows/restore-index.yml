@@ -1,0 +1,19 @@
+name: Restore index.html
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy demo file to index.html
+        run: |
+          cp rockin-j-rentals-public-demo-site.html index.html
+          ls -lh index.html rockin-j-rentals-public-demo-site.html
+          git config user.name "btb2249"
+          git config user.email "btb2249@users.noreply.github.com"
+          git add index.html
+          git commit -m "Restore full index.html" || echo "nothing to commit"
+          git push
